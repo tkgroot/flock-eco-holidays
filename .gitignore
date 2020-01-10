@@ -1,9 +1,12 @@
+# *-- Custom Ignores --*
 # secrets
 service-account.json
 secrets.tar
 
-# *-- Custom Ignores --*
+# ktlint reports
 ktlint.xml
+
+# mvn
 .m2/
 
 # Created by https://www.gitignore.io/api/windows,macos,linux,sublimetext,intellij,visualstudiocode,git,node,react,maven,kotlin,java,dart,flutter
