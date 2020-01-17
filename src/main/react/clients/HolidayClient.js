@@ -25,15 +25,8 @@ function post(holidayForm) {
   return client.post(toHolidayForm(holidayForm))
 }
 
-function putHoliday(id, holiday) {
-  const opts = {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(holiday),
-  }
-  return fetch(`/api/holidays/${id}`, opts).then(res => res.json())
+function put(id, holidayForm) {
+  return client.put(id, toHolidayForm(holidayForm))
 }
 
 export const HolidayClient = {
@@ -41,6 +34,6 @@ export const HolidayClient = {
   findAll,
   findByCode,
   findAllByPersonCode,
-  putHoliday,
   post,
+  put,
 }
