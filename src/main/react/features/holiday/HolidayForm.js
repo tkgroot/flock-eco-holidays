@@ -9,7 +9,6 @@ import MenuItem from "@material-ui/core/MenuItem"
 import UserAuthorityUtil from "@flock-eco/feature-user/src/main/react/user_utils/UserAuthorityUtil"
 import {PeriodForm} from "../../components/PeriodForm"
 import {HolidayClient} from "../../clients/HolidayClient"
-import {isDefined} from "../../utils/validation"
 
 export const HOLIDAY_FORM_ID = "holiday-form-id"
 
@@ -42,11 +41,10 @@ export function HolidayForm(props) {
 
   const handleSubmit = value => {
     console.log(state, value)
-    if (isDefined(onSubmit))
-      onSubmit({
-        ...state,
-        ...value,
-      })
+    onSubmit({
+      ...state,
+      ...value,
+    })
   }
 
   const handleChangePeriod = value => {
@@ -118,5 +116,5 @@ export function HolidayForm(props) {
 
 HolidayForm.propTypes = {
   code: PropTypes.string,
-  onSubmit: PropTypes.func,
+  onSubmit: PropTypes.func.isRequired,
 }
