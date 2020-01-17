@@ -3,14 +3,23 @@ import PropTypes from "prop-types"
 import {Dialog, DialogContent} from "@material-ui/core"
 import moment, {HTML5_FMT} from "moment"
 import HolidayIcon from "@material-ui/icons/WbSunny"
+import {makeStyles} from "@material-ui/styles"
 import {DialogHeader, DialogFooter} from "../../components/dialog"
 import {HolidayClient} from "../../clients/HolidayClient"
 import {HOLIDAY_FORM_ID, HolidayForm} from "./HolidayForm"
 import {isDefined} from "../../utils/validation"
 import {TransitionSlider} from "../../components/transitions/Slide"
 
+const useStyles = makeStyles(() => ({
+  dialogContent: {
+    margin: "auto",
+    maxWidth: 700, // should be a decent medium-sized breakpoint
+  },
+}))
+
 export function HolidayDialog(props) {
   const {holidayCode, personCode, open, onComplete} = props
+  const classes = useStyles()
 
   const handleSubmit = it => {
     if (it.id) {
@@ -55,7 +64,7 @@ export function HolidayDialog(props) {
         subheadline="Have the best time of your life, beside working for flock"
         onClose={handleClose}
       />
-      <DialogContent>
+      <DialogContent className={classes.dialogContent}>
         <HolidayForm code={holidayCode} onSubmit={handleSubmit} />
       </DialogContent>
       <DialogFooter formId={HOLIDAY_FORM_ID} onClose={handleClose} />
