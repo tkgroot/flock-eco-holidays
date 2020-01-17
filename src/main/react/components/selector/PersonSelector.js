@@ -11,7 +11,7 @@ import {
 import {PersonService} from "../../features/person/PersonService"
 
 export function PersonSelector(props) {
-  const {onChange, label, selectedItem} = props
+  const {embedded, onChange, label, selectedItem} = props
   const [items, setItems] = useState([])
   const [selected, setSelected] = useState("")
 
@@ -35,30 +35,36 @@ export function PersonSelector(props) {
     )
   }
 
-  return (
+  const selectInput = (
+    <FormControl fullWidth>
+      <InputLabel shrink>{label}</InputLabel>
+      <Select value={selected} displayEmpty onChange={handleChange}>
+        <MenuItem value="">
+          <em>None</em>
+        </MenuItem>
+        {items.map(renderMenuItem)}
+      </Select>
+    </FormControl>
+  )
+
+  return embedded ? (
+    <div>{selectInput}</div>
+  ) : (
     <Card>
-      <CardContent>
-        <FormControl fullWidth>
-          <InputLabel shrink>{label}</InputLabel>
-          <Select value={selected} displayEmpty onChange={handleChange}>
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            {items.map(renderMenuItem)}
-          </Select>
-        </FormControl>
-      </CardContent>
+      <CardContent>{selectInput}</CardContent>
     </Card>
   )
 }
 
 PersonSelector.propTypes = {
+  embedded: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
   label: PropTypes.string,
   selectedItem: PropTypes.string,
 }
 
 PersonSelector.defaultProps = {
+  embedded: false,
   selectedItem: "",
   label: "Select Person",
 }
